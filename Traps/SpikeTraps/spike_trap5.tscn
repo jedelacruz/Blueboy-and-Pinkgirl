@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://s2edoas3p75b"]
+
+[ext_resource type="Script" path="res://Traps/SpikeTraps/spike_trap.gd" id="1_2vvvr"]
+[ext_resource type="Texture2D" uid="uid://bo634wafigpac" path="res://Art Assets/Pixel Adventure 1 ASSETS/Free/Traps/Spikes/Idle.png" id="2_w8vs5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cf8ve"]
+size = Vector2(111, 7.5)
+
+[node name="SpikeTrap" type="Area2D"]
+position = Vector2(1, -7)
+rotation = 4.71239
+script = ExtResource("1_2vvvr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w8vs5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(16, -1.52588e-05)
+texture = ExtResource("2_w8vs5")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(32, -2.86102e-05)
+texture = ExtResource("2_w8vs5")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(48, -4.19617e-05)
+texture = ExtResource("2_w8vs5")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(64, -4.95911e-05)
+texture = ExtResource("2_w8vs5")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(80, -6.10352e-05)
+texture = ExtResource("2_w8vs5")
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+position = Vector2(96, -7.62939e-05)
+texture = ExtResource("2_w8vs5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(47.5, 4.75)
+shape = SubResource("RectangleShape2D_cf8ve")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

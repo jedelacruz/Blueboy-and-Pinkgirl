@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2rq0lnvokbax"]
+
+[ext_resource type="Script" path="res://Traps/spike_trap.gd" id="1_0g28n"]
+[ext_resource type="Texture2D" uid="uid://bo634wafigpac" path="res://Art Assets/Pixel Adventure 1 ASSETS/Free/Traps/Spikes/Idle.png" id="1_2wuje"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7gjy"]
+size = Vector2(13, 7)
+
+[node name="SpikeTrap" type="Area2D"]
+position = Vector2(-7, -8)
+script = ExtResource("1_0g28n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 4.5)
+shape = SubResource("RectangleShape2D_q7gjy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2wuje")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

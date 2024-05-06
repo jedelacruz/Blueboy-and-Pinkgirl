@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://kbwq33dd7c1n"]
+
+[ext_resource type="Texture2D" uid="uid://ccbcfcfu6txmq" path="res://Art Assets/Pixel Adventure 1 ASSETS/Free/Traps/Falling Platforms/Off.png" id="1_avuyy"]
+[ext_resource type="Script" path="res://Traps/FallingPlatforms/falling_platform.gd" id="1_xduwl"]
+[ext_resource type="Texture2D" uid="uid://dmmsm56ejgupr" path="res://Art Assets/Pixel Adventure 1 ASSETS/Free/Traps/Falling Platforms/On (32x10).png" id="2_vrn5h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqjf2"]
+atlas = ExtResource("1_avuyy")
+region = Rect2(0, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjjol"]
+atlas = ExtResource("2_vrn5h")
+region = Rect2(0, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4tmu"]
+atlas = ExtResource("2_vrn5h")
+region = Rect2(32, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8c4ag"]
+atlas = ExtResource("2_vrn5h")
+region = Rect2(64, 0, 32, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4geo0"]
+atlas = ExtResource("2_vrn5h")
+region = Rect2(96, 0, 32, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dqjbh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqjf2")
+}],
+"loop": true,
+"name": &"OFF",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjjol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4tmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8c4ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4geo0")
+}],
+"loop": true,
+"name": &"ON",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1tkp7"]
+size = Vector2(32, 5)
+
+[node name="FallingPlatform1" type="Area2D"]
+script = ExtResource("1_xduwl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dqjbh")
+animation = &"OFF"
+autoplay = "OFF"
+frame_progress = 0.570959
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_1tkp7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

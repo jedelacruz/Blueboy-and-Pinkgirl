@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgai65u7rmost"]
+
+[ext_resource type="Texture2D" uid="uid://ch3jce02ku085" path="res://Art Assets/Pixel Adventure 1 ASSETS/Free/Traps/Spiked Ball/Chain.png" id="1_rqq5t"]
+[ext_resource type="Script" path="res://Traps/SpikeballTrap/SpikeBallHead.gd" id="2_bd47d"]
+[ext_resource type="Texture2D" uid="uid://cany0s0hjmas0" path="res://Art Assets/Pixel Adventure 1 ASSETS/Free/Traps/Spiked Ball/Spiked Ball.png" id="2_flx7i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_icnhu"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_kupvf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.22173]
+}
+
+[sub_resource type="Animation" id="Animation_8qobv"]
+resource_name = "swingSpikeBall"
+length = 1.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.22173, 0.0, -1.22173]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jskdh"]
+_data = {
+"RESET": SubResource("Animation_kupvf"),
+"swingSpikeBall": SubResource("Animation_8qobv")
+}
+
+[node name="SpikeBall1" type="Area2D"]
+rotation = 1.22173
+
+[node name="ChainLink" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("1_rqq5t")
+
+[node name="ChainLink2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 10)
+texture = ExtResource("1_rqq5t")
+
+[node name="ChainLink3" type="Sprite2D" parent="."]
+position = Vector2(0, 20)
+texture = ExtResource("1_rqq5t")
+
+[node name="ChainLink4" type="Sprite2D" parent="."]
+position = Vector2(0, 30)
+texture = ExtResource("1_rqq5t")
+
+[node name="SpikeBallHead" type="Area2D" parent="."]
+position = Vector2(0, 50)
+script = ExtResource("2_bd47d")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpikeBallHead"]
+texture = ExtResource("2_flx7i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeBallHead"]
+shape = SubResource("CircleShape2D_icnhu")
+debug_color = Color(0.6, 0.533333, 0.32549, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jskdh")
+}
+autoplay = "swingSpikeBall"
+
+[connection signal="area_entered" from="SpikeBallHead" to="SpikeBallHead" method="_on_area_entered"]
